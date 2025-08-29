@@ -26,6 +26,13 @@
             min-height: 100vh;
             color: #1e293b;
             position: relative;
+            scrollbar-width: none; /* Firefox */
+            -ms-overflow-style: none; /* IE and Edge */
+        }
+
+        /* Ocultar scrollbar para Webkit browsers (Chrome, Safari, etc.) */
+        body::-webkit-scrollbar {
+            display: none;
         }
 
         body::before {
@@ -388,7 +395,7 @@
         }
     </style>
 </head>
-<body class="overflow-hidden">
+<body>
     <!-- Container principal com design limpo -->
     <div class="main-container relative z-10 h-screen p-8">
         <!-- Header elegante -->
