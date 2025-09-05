@@ -225,7 +225,7 @@
             box-shadow: 
                 0 15px 40px rgba(0,0,0,0.2),
                 0 5px 15px rgba(0,0,0,0.1);
-            border: 2px solid rgba(59, 130, 246, 0.3);
+            border: 2px solid rgba(100, 116, 139, 0.35); /* slate-500 @ 35% */
             z-index: 25;
             transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             cursor: pointer;
@@ -235,13 +235,22 @@
             color: #1e293b;
         }
 
+        /* Gradiente do título aplicado ao texto (igual ao H1) */
+        .gradient-title-text {
+            background-image: linear-gradient(to right, #881337, #701a75, #581c87); /* rose-900 -> fuchsia-900 -> purple-900 */
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            -webkit-text-fill-color: transparent;
+        }
+
         .external-label:hover {
             transform: scale(1.12) translateZ(0);
             box-shadow: 
                 0 20px 60px rgba(0,0,0,0.3),
                 0 8px 20px rgba(0,0,0,0.2);
             backdrop-filter: blur(30px);
-            border-color: rgba(59, 130, 246, 0.5);
+            border-color: rgba(71, 85, 105, 0.5); /* slate-600 @ 50% */
             background: rgba(255, 255, 255, 0.98);
         }
 
@@ -276,44 +285,28 @@
         }
 
         /* Cores específicas para cada label - mais vibrantes */
-        .discovery-label {
-            color: #1e40af;
-            border-color: #3b82f6;
-            background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(147, 197, 253, 0.15));
-        }
+    .discovery-label { border-color: rgba(100, 116, 139, 0.35); }
 
         .discovery-label:hover {
-            background: linear-gradient(135deg, rgba(59, 130, 246, 0.25), rgba(147, 197, 253, 0.25));
+            border-color: rgba(79, 70, 229, 0.5); /* indigo-600 @ 50% */
         }
 
-        .assessment-label {
-            color: #0f766e;
-            border-color: #14b8a6;
-            background: linear-gradient(135deg, rgba(20, 184, 166, 0.15), rgba(94, 234, 212, 0.15));
-        }
+    .assessment-label { border-color: rgba(100, 116, 139, 0.35); }
 
         .assessment-label:hover {
-            background: linear-gradient(135deg, rgba(20, 184, 166, 0.25), rgba(94, 234, 212, 0.25));
+            border-color: rgba(79, 70, 229, 0.5);
         }
 
-        .control-label {
-            color: #4338ca;
-            border-color: #6366f1;
-            background: linear-gradient(135deg, rgba(99, 102, 241, 0.15), rgba(165, 180, 252, 0.15));
-        }
+    .control-label { border-color: rgba(100, 116, 139, 0.35); }
 
         .control-label:hover {
-            background: linear-gradient(135deg, rgba(99, 102, 241, 0.25), rgba(165, 180, 252, 0.25));
+            border-color: rgba(79, 70, 229, 0.5);
         }
 
-        .governance-label {
-            color: #b45309;
-            border-color: #f59e0b;
-            background: linear-gradient(135deg, rgba(245, 158, 11, 0.15), rgba(252, 211, 77, 0.15));
-        }
+    .governance-label { border-color: rgba(100, 116, 139, 0.35); }
 
         .governance-label:hover {
-            background: linear-gradient(135deg, rgba(245, 158, 11, 0.25), rgba(252, 211, 77, 0.25));
+            border-color: rgba(79, 70, 229, 0.5);
         }
 
         /* Estilos para responsividade */
@@ -410,9 +403,7 @@
                     Painel de Análise Comparativa
                 </p>
                 <p class="text-base text-gray-600 max-w-2xl mx-auto leading-relaxed">
-                    Visualização interativa comparando as abordagens da 
-                    <span class="font-semibold text-blue-600">IBM</span> e 
-                    <span class="font-semibold text-teal-600">Crowdstrike</span>
+                    Visualização interativa para comparar diferentes frameworks de segurança.
                 </p>
             </div>
         </header>
@@ -445,22 +436,22 @@
                     <!-- Labels externos modernos com ícones -->
                     <div class="external-label label-discovery discovery-label" data-section="discover" onclick="showModal('discover-modal')">
                         <i class="fas fa-search mr-2"></i>
-                        Descoberta
+                        <span class="gradient-title-text">Discovery</span>
                     </div>
                     
                     <div class="external-label label-assessment assessment-label" data-section="assess" onclick="showModal('assess-modal')">
                         <i class="fas fa-chart-line mr-2"></i>
-                        Avaliação
+                        <span class="gradient-title-text">Assessment</span>
                     </div>
                     
                     <div class="external-label label-control control-label" data-section="control" onclick="showModal('control-modal')">
                         <i class="fas fa-cogs mr-2"></i>
-                        Controle
+                        <span class="gradient-title-text">Control</span>
                     </div>
                     
                     <div class="external-label label-governance governance-label" data-section="report" onclick="showModal('report-modal')">
                         <i class="fas fa-clipboard-check mr-2"></i>
-                        Governança
+                        <span class="gradient-title-text">Governance</span>
                     </div>
                     
                     <!-- Centro do donut modernizado -->
@@ -484,97 +475,69 @@
         discover: {
             title: '1. Descoberta: Visibilidade Total',
             intro: 'O objetivo aqui é eliminar a "Shadow AI" e criar um inventário completo de todos os modelos e casos de uso para entender a superfície de ataque.',
-            ibm: {
-                title: 'IBM Guardium AI Security',
-                points: [
-                    '<strong>Abordagem Sem Agente (Agentless):</strong> Utiliza varreduras contínuas e automatizadas de ambientes na nuvem e repositórios de código.',
-                    '<strong>Foco em Governança:</strong> Cria um inventário abrangente projetado para equipes de risco e conformidade.',
-                    '<strong>Monitoramento Contínuo:</strong> Identifica todos os casos de uso de IA, conhecidos e "shadow".'
-                ]
-            },
-            crowdstrike: {
-                title: 'Crowdstrike Suite',
-                points: [
-                    '<strong>Visibilidade da Plataforma Unificada:</strong> Aproveita a telemetria de agentes de endpoint e conectores de nuvem para visibilidade em tempo real.',
-                    '<strong>Foco em Segurança Operacional:</strong> Fornece uma visão da superfície de ataque para operadores de segurança.',
-                    '<strong>Análise da Cadeia de Suprimentos:</strong> Vantagem crítica ao inspecionar imagens de contêineres para descobrir pacotes e dependências de IA ocultos.'
-                ]
-            },
+            solutions: [
+                { title: 'IBM Guardium', points: ['Varredura sem agente (agentless) de contas na nuvem e repositórios de código.', 'Foco em modelos e agentes de IA não sancionados em ambientes de nuvem e desenvolvimento.'] },
+                { title: 'Lakera', points: ['Não aplicável. A plataforma protege aplicações conhecidas, mas não descobre ativamente as desconhecidas.', 'A descoberta de ameaças ocorre dentro das aplicações já protegidas.'] },
+                { title: 'Coralogix', points: ['Análise de dados de observabilidade (logs, traces) e varredura de repositórios de código.', 'Identifica "Shadow AI" impulsionada pela atividade de desenvolvedores.'] },
+                { title: 'Crowdstrike', points: ['Visibilidade da plataforma unificada (agente de endpoint, conectores SaaS, sensores de nuvem).', 'Detecta o uso de ferramentas públicas de GenAI por funcionários e pacotes de IA em builds.'] },
+                { title: 'Securiti', points: ['Varredura automatizada de nuvens (IaaS/PaaS) e SaaS para catalogar modelos de IA.', 'Cria inventário de "shadow AI" e mapeia os dados que esses modelos acessam.'] },
+            ],
             verdict: {
                 winner: 'Crowdstrike',
-                reason: 'A visibilidade da cadeia de suprimentos (MLOps) e a telemetria unificada da plataforma Falcon oferecem uma descoberta mais profunda e orientada à segurança.'
+                reason: 'A abordagem multifacetada, que aproveita a ampla visibilidade desde o endpoint do usuário até o pipeline na nuvem, oferece a descoberta mais abrangente de usos de IA sancionados e não sancionados.',
+                runner_up: 'Securiti',
+                runner_up_reason: 'Sua capacidade de vincular o inventário de modelos de IA diretamente ao cenário de dados subjacente responde não apenas "quais modelos temos?", mas também "quais dados sensíveis eles podem acessar?".'
             }
         },
         assess: {
             title: '2. Avaliação: Quantificar Riscos',
             intro: 'Esta etapa avalia a postura de segurança, envolvendo varredura de vulnerabilidades e testes adversários para simular ataques do mundo real.',
-            ibm: {
-                title: 'IBM Guardium AI Security',
-                points: [
-                    '<strong>Red Teaming Automatizado:</strong> Oferece uma ferramenta integrada para detectar e corrigir vulnerabilidades de forma contínua e escalável.',
-                    '<strong>Mapeamento de Frameworks:</strong> Alinha os resultados com frameworks de conformidade como OWASP Top 10 para LLMs e NIST AI RMF.',
-                    '<strong>Gestão de Postura (AI-SPM):</strong> Fornece monitoramento contínuo e recomendações para melhorar a postura de segurança.'
-                ]
-            },
-            crowdstrike: {
-                title: 'Crowdstrike Suite',
-                points: [
-                    '<strong>Serviços de Red Team Especializados:</strong> Oferece consultoria liderada por especialistas para simular ataques complexos e realistas.',
-                    '<strong>Varredura Específica de Ameaças:</strong> Detecta malware, modelos trojanizados e backdoors, refletindo sua expertise em inteligência de ameaças.',
-                    '<strong>Módulo AI-SPM Dedicado:</strong> Integrado ao Falcon Cloud Security para visibilidade, detecção de riscos e monitoramento de conformidade.'
-                ]
-            },
+            solutions: [
+                { title: 'IBM Guardium', points: ['AI-SPM para varredura de vulnerabilidades e configurações incorretas.', 'Executa testes de penetração (pen testing) automatizados como um recurso da plataforma.'] },
+                { title: 'Lakera', points: ['Benchmarking contínuo de modelos contra um banco de dados de ameaças em tempo real.', 'Uso de ferramentas de Red Teaming (Lakera Red) e inteligência de crowdsourcing (Gandalf).'] },
+                { title: 'Coralogix', points: ['AI-SPM em tempo real com pontuação de postura dinâmica baseada em telemetria em tempo real.', 'Detecção de ameaças via "Avaliadores de Segurança" personalizáveis em dados em tempo real.'] },
+                { title: 'Crowdstrike', points: ['AI-SPM para ativos na nuvem com priorização de vulnerabilidades via EXPRT.AI.', 'Oferece serviços de AI Red Team liderados por especialistas para simulações de ataque aprofundadas.'] },
+                { title: 'Securiti', points: ['Avaliação de risco de modelo para viés, toxicidade e violação de direitos autorais.', 'Mapeamento do fluxo de dados (Data+AI Mapping) para identificar riscos na linhagem dos dados.'] },
+            ],
             verdict: {
-                winner: 'Empate',
-                reason: 'A IBM lidera em automação, enquanto a Crowdstrike se destaca com serviços especializados e inteligência de ameaças. A escolha depende da maturidade da equipe.'
+                winner: 'Lakera',
+                reason: 'A abordagem dinâmica e baseada em crowdsourcing, utilizando o jogo "Gandalf" para alimentar seu banco de dados de ameaças em tempo real, é um método único e poderoso para se manter à frente de exploits emergentes.',
+                runner_up: 'IBM Guardium',
+                runner_up_reason: 'A ênfase em testes de penetração automatizados integrados diretamente na plataforma oferece uma capacidade de avaliação adversária proativa e escalável.'
             }
         },
         control: {
             title: '3. Controle: Proteção Proativa',
             intro: 'A camada de defesa ativa, onde políticas são aplicadas para proteger os sistemas de IA, prevenindo fuga de dados e bloqueando ataques de injeção de prompt.',
-            ibm: {
-                title: 'IBM Guardium AI Security',
-                points: [
-                    '<strong>Segurança de Prompts Nativa (Vantagem Chave):</strong> Inclui um gateway de IA que inspeciona e bloqueia injeções de código e jailbreaks em tempo real.',
-                    '<strong>Prevenção de Fuga de Dados (DLP):</strong> Varre prompts de entrada e saída para exposição de PII e dados sensíveis.',
-                    '<strong>Controle de Acesso Baseado em Governança:</strong> Monitora o acesso e as modificações de modelos, ligando a segurança a fluxos de trabalho de GRC.'
-                ]
-            },
-            crowdstrike: {
-                title: 'Crowdstrike Suite',
-                points: [
-                    '<strong>Proteção em Tempo de Execução (Vantagem Chave):</strong> Usa eBPF para proteção de baixo nível e alto desempenho de workloads de IA na nuvem.',
-                    '<strong>Resposta Automatizada para Agentes:</strong> Aproveita as capacidades de XDR para detectar e responder automaticamente a comportamentos maliciosos de agentes de IA.',
-                    '<strong>DLP Granular:</strong> Bloqueia fugas de dados com políticas baseadas em conteúdo, origem e tipo de arquivo.'
-                ]
-            },
+            solutions: [
+                { title: 'IBM Guardium', points: ['Gateway de IA nativo para detectar e bloquear injeção de prompt e "jailbreaks".', 'Bloqueio de dados sensíveis (PII/PHI) em prompts e respostas com base em políticas.'] },
+                { title: 'Lakera', points: ['Gateway de API de baixa latência (Lakera Guard) como principal recurso para proteção em tempo real.', 'Previne ataques de prompt e vazamento de dados (PII) nas interações com o LLM.'] },
+                { title: 'Coralogix', points: ['Detecção em tempo real de injeção de prompt e exposição de dados via análise em fluxo.', 'O foco principal é na detecção e alerta, com capacidades de bloqueio menos centrais.'] },
+                { title: 'Crowdstrike', points: ['Foco principal na prevenção de perda de dados (DLP) no endpoint.', 'Bloqueia uploads de dados sensíveis para ferramentas de GenAI, mas não analisa os prompts de entrada.'] },
+                { title: 'Securiti', points: ['Firewall de LLM de 3 estágios (Prompt, Retrieval, Response) para proteção completa.', 'O "Retrieval Firewall" aplica controles de acesso aos dados que alimentam sistemas RAG.'] },
+            ],
             verdict: {
-                winner: 'IBM',
-                reason: 'A segurança de prompts nativa e inline é um diferencial decisivo para proteger aplicações LLM, uma área onde a Crowdstrike depende de parceiros.'
+                winner: 'Securiti',
+                reason: 'A arquitetura de firewall de 3 estágios, especialmente o "Retrieval Firewall", aborda o principal vetor de risco em arquiteturas RAG empresariais (os próprios dados), tornando-a a solução de controle mais robusta e moderna.',
+                runner_up: 'IBM Guardium',
+                runner_up_reason: 'O Gateway de IA nativo oferece proteção robusta e em tempo real contra injeções de prompt e jailbreaks, um controle essencial para aplicações baseadas em LLM.'
             }
         },
         report: {
             title: '4. Governança e Relatórios',
             intro: 'A camada final traduz dados técnicos em insights de negócio, garantindo a conformidade com regulamentações e políticas internas através de painéis e relatórios.',
-            ibm: {
-                title: 'IBM Guardium AI Security',
-                points: [
-                    '<strong>Integração Profunda com Governança (Vantagem Chave):</strong> Conexão nativa com IBM watsonx.governance para traduzir segurança em fluxos de trabalho de GRC.',
-                    '<strong>Foco Explícito em Conformidade:</strong> Suporte declarado para frameworks como o EU AI Act e ISO 42001, ideal para indústrias regulamentadas.',
-                    '<strong>Painel Unificado (Segurança + Risco):</strong> Oferece uma visão consolidada para equipes de segurança e conformidade.'
-                ]
-            },
-            crowdstrike: {
-                title: 'Crowdstrike Suite',
-                points: [
-                    '<strong>Plataforma Unificada de Segurança:</strong> Oferece um painel único para todas as operações de segurança (Endpoint, Nuvem, Identidade, IA).',
-                    '<strong>Integração Aberta:</strong> Fornece um gateway (falcon-mcp) para conectar dados de IA a ferramentas de automação de SecOps e governança.',
-                    '<strong>Conformidade via Monitoramento:</strong> O AI-SPM permite a conformidade com normas como GDPR e HIPAA através da monitorização contínua de configurações.'
-                ]
-            },
+            solutions: [
+                { title: 'IBM Guardium', points: ['Dashboards unificados que combinam métricas de segurança (Guardium) e governança (watsonx).', 'Mapeamento explícito para frameworks como EU AI Act, NIST e ISO 42001.'] },
+                { title: 'Lakera', points: ['Dashboards de gerenciamento de risco focados em ameaças a nível de aplicação.', 'Forte alinhamento com o framework OWASP Top 10 para LLMs.'] },
+                { title: 'Coralogix', points: ['Dashboard do AI-SPM com pontuações de postura, usuários de alto risco e tendências.', 'Mapeamento para padrões como ISO 42001, com forte capacidade de retenção de dados para auditoria.'] },
+                { title: 'Crowdstrike', points: ['Console unificado da Falcon com análise acelerada por IA (Charlotte AI).', 'Relatórios de avaliação mapeados para frameworks como o NIST.'] },
+                { title: 'Securiti', points: ['Dashboard de inteligência centralizado com alertas de segurança e violações de políticas.', 'Mapeamento para mais de 20 regulamentações globais, com automação de verificações de conformidade.'] },
+            ],
             verdict: {
-                winner: 'IBM',
-                reason: 'A integração nativa com uma plataforma de GRC (watsonx.governance) e o foco explícito em regulamentações como o EU AI Act são incomparáveis.'
+                winner: 'Securiti',
+                reason: 'A amplitude de regulamentações suportadas (+20), juntamente com a automação de verificações de conformidade e a geração de relatórios prontos para auditoria, oferece a mais poderosa capacidade de GRC centrada em dados.',
+                runner_up: 'IBM Guardium',
+                runner_up_reason: 'A integração nativa com uma plataforma GRC dedicada (watsonx.governance) cria uma fonte única de verdade para equipes de segurança e risco, uma proposta poderosa para grandes empresas.'
             }
         }
     };
@@ -587,54 +550,75 @@
             control: 'border-indigo-500',
             report: 'border-amber-500',
         };
-        const checkIcon = `<svg class="w-5 h-5 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>`;
-        let veredictHTML = '';
-        // Sempre usar o mesmo estilo cinza para todos os veredictos
-        const scalesIcon = `<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" /></svg>`;
-        if (data.verdict.winner !== 'Empate') {
-            veredictHTML = `
-                <div class="mt-8 p-4 rounded-lg bg-slate-100 border-l-4 border-slate-400">
-                    <h4 class="font-bold text-lg mb-2 flex items-center text-slate-700">
-                        ${scalesIcon}
-                        Veredito: ${data.verdict.winner}
-                    </h4>
-                    <p class="text-slate-700 pl-8">${data.verdict.reason}</p>
-                </div>
-            `;
-        } else {
-             veredictHTML = `
-                <div class="mt-8 p-4 rounded-lg bg-slate-100 border-l-4 border-slate-400">
-                    <h4 class="font-bold text-lg mb-2 flex items-center text-slate-700">
-                        ${scalesIcon}
-                        Veredito: Empate
-                    </h4>
-                    <p class="text-slate-700 pl-8">${data.verdict.reason}</p>
-                </div>
-            `;
-        }
+    const checkIcon = `<svg class="w-5 h-5 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>`;
+    const neutralIcon = `<svg class="w-5 h-5 mr-2 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 110 20 10 10 0 010-20zm-6 10a1 1 0 001 1h10a1 1 0 100-2H7a1 1 0 00-1 1z"/></svg>`;
+    const xIcon = `<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm-3.5-6.5l7-7m0 7l-7-7"/></svg>`;
+    const trophyIcon = `<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" viewBox="0 0 24 24" fill="currentColor"><path d="M16 2a1 1 0 0 1 1 1v2h3a1 1 0 0 1 1 1 6 6 0 0 1-6 6h-1v3h1a3 3 0 0 1 3 3v3H6v-3a3 3 0 0 1 3-3h1v-3H9A6 6 0 0 1 3 6a1 1 0 0 1 1-1h3V3a1 1 0 0 1 1-1h8zM6 7H5.08A4.01 4.01 0 0 0 9 10V7H6zm12 0h-3v3a4.01 4.01 0 0 0 3.92-3H18z"/></svg>`;
+    const starIcon = `<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6.1 6.7.9-4.9 4.6 1.2 6.6L12 17.9l-5.9 2.8 1.2-6.6-4.9-4.6 6.7-.9L12 2.5z"/></svg>`;
+
+        const veredictHTML = `
+            <div class="mt-8 p-4 rounded-lg bg-amber-50 border-l-4 border-green-500">
+                <h4 class="font-bold text-lg mb-2 flex items-center text-zinc-600">
+                    <span class="text-amber-700">${trophyIcon}</span>
+                    Veredito (Vencedor): ${data.verdict.winner}
+                </h4>
+                <p class="text-slate-700 pl-8 mb-4">${data.verdict.reason}</p>
+                
+                <h4 class="font-bold text-lg mb-2 flex items-center text-zinc-600">
+                    <span class="text-amber-700">${starIcon}</span>
+                    2º Lugar: ${data.verdict.runner_up}
+                </h4>
+                <p class="text-slate-600 pl-8">${data.verdict.runner_up_reason}</p>
+            </div>
+        `;
+
+        const solutionsHTML = [...data.solutions].sort((a, b) => {
+            const w = data.verdict.winner;
+            const r = data.verdict.runner_up;
+            const rank = (s) => (s.title === w ? 0 : s.title === r ? 1 : 2);
+            return rank(a) - rank(b);
+        }).map(solution => {
+            const isWinner = solution.title === data.verdict.winner;
+            const isRunnerUp = solution.title === data.verdict.runner_up;
+            const cardRing = isWinner ? 'ring-2 ring-green-500' : (isRunnerUp ? 'ring-2 ring-zinc-400' : '');
+            const cardTint = isWinner ? 'bg-amber-50 border-green-500' : (isRunnerUp ? 'bg-zinc-50 border-zinc-200' : 'bg-slate-50/50 border-slate-200');
+            // Regra específica: apenas este item deve exibir vermelho
+            const negativePatterns = /^\s*(?:não aplicável\. a plataforma protege aplicações conhecidas, mas não descobre ativamente as desconhecidas\.?|a descoberta de ameaças ocorre dentro das aplicações já protegidas\.?)\s*$/i;
+            // Heurísticas para cobertura parcial/limitada -> tick neutro (cinza)
+            const partialPatterns = /(parcial(?:mente)?|limitad[oa]s?|restrit[oa]s?|b[áa]sic[oa]s?|incipient[ea]|menos\s+centrais?|(?:n(?:ã|a)o\s+)?[ée]\s+foco|foco\s+principal(?:\s+(?:em|no|na))?|foco\s+maior\s+(?:em|no|na)|prioritariamente|principalmente|apenas|somente|melhor\s+em|mais\s+voltad[oa]\s+a|detec(?:ç|c)[ãa]o\s+(?:e\s+)?alerta|somente\s+(?:detec(?:ç|c)[ãa]o|alerta)|sem\s+(?:bloqueio|enforcement)|bloqueio\s+menos\s+centrais?|n(?:ã|a)o\s+nativo|via\s+parceir[oa]s?|em\s+parceria|depende\s+de\s+parceir[oa]s?|requer\s+servi(?:ç|c)os\s+profissionais|integra(?:ç|c)(?:[ãa]o|[õo]es)\s+limitad[as]?|suporte\s+parcial|cobertura\s+parcial|automa(?:ç|c)[ãa]o\s+limitada|(?:em\s+)?(?:beta|preview|roadmap))/i;
+            const badge = isWinner ? `<span class=\"ml-2 inline-flex items-center text-amber-700\">${trophyIcon}</span>` : (isRunnerUp ? '' : '');
+            return `
+            <div class="border ${cardTint} p-6 rounded-xl flex flex-col ${cardRing}">
+                <h3 class="font-bold text-xl mb-4 text-slate-700 flex items-center">${solution.title}${badge}</h3>
+                <ul class="space-y-3 text-slate-700 flex-grow">
+                    ${solution.points.map(p => {
+                        const hasNegTag = /\[(NEG|NA)\]/i.test(p);
+                        const hasPartTag = /\[(PART|NEUTRO)\]/i.test(p);
+                        const cleanText = p.replace(/\s*\[(NEG|NA|PART|NEUTRO)\]\s*/ig, '').trim();
+                        const isNeg = hasNegTag || negativePatterns.test(cleanText);
+                        const isExactPartial = /^\s*(Dashboards de gerenciamento de risco focados em ameaças a nível de aplicação\.?|Forte alinhamento com o framework OWASP Top 10 para LLMs\.?|Bloqueia uploads de dados sensíveis para ferramentas de GenAI, mas não analisa os prompts de entrada\.?)\s*$/i.test(cleanText);
+                        const isPart = !isNeg && (hasPartTag || isExactPartial || partialPatterns.test(cleanText));
+                        const icon = isNeg ? xIcon : (isPart ? neutralIcon : checkIcon);
+                        const color = isNeg ? 'text-red-600' : (isPart ? 'text-slate-500' : 'text-green-600');
+                        const emphasis = isPart ? 'opacity-80' : '';
+                        return `<li class=\"flex items-start\"><span class=\"${color} ${emphasis} mt-1 mr-2\">${icon}</span><span>${cleanText}</span></li>`;
+                    }).join('')}
+                </ul>
+            </div>`;
+        }).join('');
+        
         return `
             <div id="${sectionKey}-modal" class="modal-overlay hidden fixed inset-0 bg-slate-900 bg-opacity-70 flex items-center justify-center p-4 z-50">
-                <div class="modal-content ${modalBorderColors[sectionKey]} bg-white p-6 md:p-10 rounded-2xl shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-y-auto">
+                <div class="modal-content ${modalBorderColors[sectionKey]} bg-white p-6 md:p-10 rounded-2xl shadow-2xl w-full max-w-7xl max-h-[90vh] overflow-y-auto">
                     <div class="flex justify-between items-center mb-4">
                         <h2 class="text-2xl md:text-3xl font-bold text-slate-900">${data.title}</h2>
                         <button class="close-modal-btn text-slate-500 hover:text-slate-800 transition-colors" data-modal="${sectionKey}-modal">
                             <span class="text-3xl font-light">&times;</span>
                         </button>
                     </div>
-                    <p class="text-slate-600 max-w-3xl mb-8">${data.intro}</p>
-                    <div class="grid md:grid-cols-2 gap-6">
-                        <div class="border border-blue-200 bg-blue-50/50 p-6 rounded-xl">
-                            <h3 class="font-bold text-xl mb-4 text-blue-700">${data.ibm.title}</h3>
-                            <ul class="space-y-3 text-slate-700">
-                                ${data.ibm.points.map(p => `<li class="flex items-start"><span class="text-blue-500 mt-1">${checkIcon}</span><span>${p}</span></li>`).join('')}
-                            </ul>
-                        </div>
-                        <div class="border border-teal-200 bg-teal-50/50 p-6 rounded-xl">
-                            <h3 class="font-bold text-xl mb-4 text-teal-700">${data.crowdstrike.title}</h3>
-                            <ul class="space-y-3 text-slate-700">
-                                ${data.crowdstrike.points.map(p => `<li class="flex items-start"><span class="text-teal-500 mt-1">${checkIcon}</span><span>${p}</span></li>`).join('')}
-                            </ul>
-                        </div>
+                    <p class="text-slate-600 max-w-5xl mb-8">${data.intro}</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
+                        ${solutionsHTML}
                     </div>
                     ${veredictHTML}
                 </div>
