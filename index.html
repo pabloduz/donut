@@ -601,7 +601,7 @@
             animation: fadeIn 0.8s ease-out forwards;
         }
 
-        /* Botão de tela cheia elegante */
+        /* Botão de tela cheia elegante com efeito de respiração */
         .fullscreen-btn {
             position: fixed;
             top: 20px;
@@ -617,19 +617,21 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: all 0.3s ease, opacity 0.5s ease;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            animation: breathingEffect 4s ease-in-out infinite;
         }
 
         .fullscreen-btn:hover {
-            transform: scale(1.1);
+            transform: scale(1.05);
             background: rgba(255, 255, 255, 0.95);
             border-color: rgba(79, 70, 229, 0.6);
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 8px 25px rgba(79, 70, 229, 0.15), 0 4px 15px rgba(0, 0, 0, 0.1);
         }
 
         .fullscreen-btn:active {
-            transform: scale(0.95);
+            transform: scale(0.9);
+            transition: all 0.1s ease;
         }
 
         .fullscreen-btn i {
@@ -640,31 +642,41 @@
 
         .fullscreen-btn:hover i {
             color: #3730a3;
+            transform: scale(1.05);
         }
 
-        /* Animação de pulso para indicar F11 */
-        .fullscreen-btn::before {
-            content: '';
-            position: absolute;
-            inset: -4px;
-            border: 2px solid rgba(79, 70, 229, 0.4);
-            border-radius: 16px;
-            opacity: 0;
-            animation: pulseRing 2s infinite ease-out;
-        }
-
-        @keyframes pulseRing {
-            0% {
+        /* Animação de respiração realística */
+        @keyframes breathingEffect {
+            0%, 100% {
                 transform: scale(1);
-                opacity: 0.8;
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+                border-color: rgba(79, 70, 229, 0.3);
             }
             50% {
-                transform: scale(1.1);
-                opacity: 0.4;
+                transform: scale(1.04);
+                box-shadow: 0 6px 25px rgba(79, 70, 229, 0.2), 0 4px 15px rgba(0, 0, 0, 0.15);
+                border-color: rgba(79, 70, 229, 0.4);
             }
-            100% {
-                transform: scale(1.2);
-                opacity: 0;
+        }
+        /* Modo escuro para o botão com efeito de respiração */
+        body.dark .fullscreen-btn {
+            background: rgba(30, 41, 59, 0.9);
+            border-color: rgba(99, 102, 241, 0.4);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            animation: breathingEffectDark 4s ease-in-out infinite;
+        }
+
+        /* Animação de respiração para modo escuro */
+        @keyframes breathingEffectDark {
+            0%, 100% {
+                transform: scale(1);
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+                border-color: rgba(99, 102, 241, 0.4);
+            }
+            50% {
+                transform: scale(1.04);
+                box-shadow: 0 6px 25px rgba(99, 102, 241, 0.3), 0 4px 15px rgba(0, 0, 0, 0.4);
+                border-color: rgba(99, 102, 241, 0.6);
             }
         }
 
@@ -703,15 +715,17 @@
             transform: rotate(45deg);
         }
 
-        /* Modo escuro para o botão */
+        /* Modo escuro para o botão com animações melhoradas */
         body.dark .fullscreen-btn {
             background: rgba(30, 41, 59, 0.9);
             border-color: rgba(99, 102, 241, 0.4);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
         }
 
         body.dark .fullscreen-btn:hover {
             background: rgba(30, 41, 59, 0.95);
             border-color: rgba(99, 102, 241, 0.7);
+            box-shadow: 0 8px 25px rgba(99, 102, 241, 0.2), 0 4px 15px rgba(0, 0, 0, 0.3);
         }
 
         body.dark .fullscreen-btn i {
@@ -725,9 +739,9 @@
 </head>
 <body class="dark">
     <!-- Botão de tela cheia elegante -->
-    <button class="fullscreen-btn" onclick="toggleFullscreen()" title="Pressione F11 ou clique para tela cheia">
+    <button class="fullscreen-btn" onclick="toggleFullscreen()" title="Clique para tela cheia">
         <i class="fas fa-expand"></i>
-        <div class="tooltip">F11 ou Clique</div>
+        <div class="tooltip">Tela Cheia</div>
     </button>
 
     <!-- Container principal com design limpo -->
@@ -743,7 +757,7 @@
                     Painel de Análise Comparativa
                 </p>
                 <p class="text-base text-gray-600 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed mb-4">
-                    Visualização interativa de soluções de segurança (Fn + F11).
+                    Visualização interativa de soluções de segurança.
                 </p>
             </div>
         </header>
@@ -817,7 +831,7 @@
             // Entrar em tela cheia
             document.documentElement.requestFullscreen().then(() => {
                 updateFullscreenButton(true);
-                showFullscreenNotification('Modo tela cheia ativado! Pressione ESC para sair.');
+                showFullscreenNotification('Modo tela cheia ativado.');
             }).catch((err) => {
                 console.log('Erro ao entrar em tela cheia:', err);
                 showFullscreenNotification('Não foi possível ativar o modo tela cheia.');
@@ -840,13 +854,23 @@
         const tooltip = btn.querySelector('.tooltip');
         
         if (isFullscreen) {
+            // Ocultar botão completamente em tela cheia
+            btn.style.opacity = '0';
+            btn.style.pointerEvents = 'none';
+            btn.style.animation = 'none';
             icon.className = 'fas fa-compress';
-            tooltip.textContent = 'ESC ou Clique';
-            btn.title = 'Pressione ESC ou clique para sair da tela cheia';
+            tooltip.textContent = 'Sair';
+            btn.title = 'Clique para sair da tela cheia';
         } else {
+            // Mostrar botão no modo normal
+            btn.style.opacity = '1';
+            btn.style.pointerEvents = 'auto';
             icon.className = 'fas fa-expand';
-            tooltip.textContent = 'F11 ou Clique';
-            btn.title = 'Pressione F11 ou clique para tela cheia';
+            tooltip.textContent = 'Clique';
+            btn.title = 'Clique para tela cheia';
+            // Retomar animação de respiração no modo normal
+            const isDark = document.body.classList.contains('dark');
+            btn.style.animation = isDark ? 'breathingEffectDark 4s ease-in-out infinite' : 'breathingEffect 4s ease-in-out infinite';
         }
     }
 
@@ -922,6 +946,25 @@
             e.preventDefault();
             toggleFullscreen();
         }
+    });
+
+    // Efeitos simples do botão
+    function addButtonSimpleEffects() {
+        const btn = document.querySelector('.fullscreen-btn');
+        
+        // Apenas um efeito de hover suave
+        btn.addEventListener('mouseenter', () => {
+            btn.style.transform = 'scale(1.05)';
+        });
+
+        btn.addEventListener('mouseleave', () => {
+            btn.style.transform = 'scale(1)';
+        });
+    }
+
+    // Inicializar efeitos simples quando a página carrega
+    document.addEventListener('DOMContentLoaded', () => {
+        addButtonSimpleEffects();
     });
 
     const contentData = {
