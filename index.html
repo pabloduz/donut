@@ -600,9 +600,136 @@
         .animate-fade-in {
             animation: fadeIn 0.8s ease-out forwards;
         }
+
+        /* Botão de tela cheia elegante */
+        .fullscreen-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 48px;
+            height: 48px;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(79, 70, 229, 0.3);
+            border-radius: 12px;
+            cursor: pointer;
+            z-index: 50;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .fullscreen-btn:hover {
+            transform: scale(1.1);
+            background: rgba(255, 255, 255, 0.95);
+            border-color: rgba(79, 70, 229, 0.6);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .fullscreen-btn:active {
+            transform: scale(0.95);
+        }
+
+        .fullscreen-btn i {
+            font-size: 18px;
+            color: #4f46e5;
+            transition: all 0.3s ease;
+        }
+
+        .fullscreen-btn:hover i {
+            color: #3730a3;
+        }
+
+        /* Animação de pulso para indicar F11 */
+        .fullscreen-btn::before {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            border: 2px solid rgba(79, 70, 229, 0.4);
+            border-radius: 16px;
+            opacity: 0;
+            animation: pulseRing 2s infinite ease-out;
+        }
+
+        @keyframes pulseRing {
+            0% {
+                transform: scale(1);
+                opacity: 0.8;
+            }
+            50% {
+                transform: scale(1.1);
+                opacity: 0.4;
+            }
+            100% {
+                transform: scale(1.2);
+                opacity: 0;
+            }
+        }
+
+        /* Tooltip elegante */
+        .fullscreen-btn .tooltip {
+            position: absolute;
+            bottom: -45px;
+            right: 0;
+            background: rgba(30, 41, 59, 0.95);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 500;
+            white-space: nowrap;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            pointer-events: none;
+            backdrop-filter: blur(10px);
+        }
+
+        .fullscreen-btn:hover .tooltip {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .fullscreen-btn .tooltip::before {
+            content: '';
+            position: absolute;
+            top: -4px;
+            right: 10px;
+            width: 8px;
+            height: 8px;
+            background: rgba(30, 41, 59, 0.95);
+            transform: rotate(45deg);
+        }
+
+        /* Modo escuro para o botão */
+        body.dark .fullscreen-btn {
+            background: rgba(30, 41, 59, 0.9);
+            border-color: rgba(99, 102, 241, 0.4);
+        }
+
+        body.dark .fullscreen-btn:hover {
+            background: rgba(30, 41, 59, 0.95);
+            border-color: rgba(99, 102, 241, 0.7);
+        }
+
+        body.dark .fullscreen-btn i {
+            color: #818cf8;
+        }
+
+        body.dark .fullscreen-btn:hover i {
+            color: #a5b4fc;
+        }
     </style>
 </head>
 <body class="dark">
+    <!-- Botão de tela cheia elegante -->
+    <button class="fullscreen-btn" onclick="toggleFullscreen()" title="Pressione F11 ou clique para tela cheia">
+        <i class="fas fa-expand"></i>
+        <div class="tooltip">F11 ou Clique</div>
+    </button>
+
     <!-- Container principal com design limpo -->
     <div class="main-container relative z-10 h-screen p-4">
         <!-- Header elegante -->
@@ -616,7 +743,7 @@
                     Painel de Análise Comparativa
                 </p>
                 <p class="text-base text-gray-600 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed mb-4">
-                    Visualização interativa para comparar diferentes frameworks de segurança.
+                    Visualização interativa de soluções de segurança (Fn + F11).
                 </p>
             </div>
         </header>
@@ -684,6 +811,119 @@
     </div>
 
 <script>
+    // Função para alternar tela cheia
+    function toggleFullscreen() {
+        if (!document.fullscreenElement) {
+            // Entrar em tela cheia
+            document.documentElement.requestFullscreen().then(() => {
+                updateFullscreenButton(true);
+                showFullscreenNotification('Modo tela cheia ativado! Pressione ESC para sair.');
+            }).catch((err) => {
+                console.log('Erro ao entrar em tela cheia:', err);
+                showFullscreenNotification('Não foi possível ativar o modo tela cheia.');
+            });
+        } else {
+            // Sair da tela cheia
+            document.exitFullscreen().then(() => {
+                updateFullscreenButton(false);
+                showFullscreenNotification('Modo tela cheia desativado.');
+            }).catch((err) => {
+                console.log('Erro ao sair da tela cheia:', err);
+            });
+        }
+    }
+
+    // Atualizar ícone do botão baseado no estado
+    function updateFullscreenButton(isFullscreen) {
+        const btn = document.querySelector('.fullscreen-btn');
+        const icon = btn.querySelector('i');
+        const tooltip = btn.querySelector('.tooltip');
+        
+        if (isFullscreen) {
+            icon.className = 'fas fa-compress';
+            tooltip.textContent = 'ESC ou Clique';
+            btn.title = 'Pressione ESC ou clique para sair da tela cheia';
+        } else {
+            icon.className = 'fas fa-expand';
+            tooltip.textContent = 'F11 ou Clique';
+            btn.title = 'Pressione F11 ou clique para tela cheia';
+        }
+    }
+
+    // Mostrar notificação elegante
+    function showFullscreenNotification(message) {
+        // Remove notificação existente se houver
+        const existingNotification = document.querySelector('.fullscreen-notification');
+        if (existingNotification) {
+            existingNotification.remove();
+        }
+
+        // Criar nova notificação
+        const notification = document.createElement('div');
+        notification.className = 'fullscreen-notification';
+        notification.innerHTML = `
+            <div class="notification-content">
+                <i class="fas fa-info-circle"></i>
+                <span>${message}</span>
+            </div>
+        `;
+        
+        // Adicionar estilos inline para a notificação
+        notification.style.cssText = `
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            background: rgba(79, 70, 229, 0.95);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 500;
+            backdrop-filter: blur(20px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+            z-index: 60;
+            transform: translateX(100%);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            max-width: 300px;
+        `;
+
+        notification.querySelector('.notification-content').style.cssText = `
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        `;
+
+        document.body.appendChild(notification);
+
+        // Animar entrada
+        setTimeout(() => {
+            notification.style.transform = 'translateX(0)';
+        }, 100);
+
+        // Remover após 3 segundos
+        setTimeout(() => {
+            notification.style.transform = 'translateX(100%)';
+            setTimeout(() => {
+                if (notification.parentNode) {
+                    notification.remove();
+                }
+            }, 400);
+        }, 3000);
+    }
+
+    // Detectar mudanças de tela cheia (F11, ESC, etc.)
+    document.addEventListener('fullscreenchange', () => {
+        updateFullscreenButton(!!document.fullscreenElement);
+    });
+
+    // Detectar tecla F11
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'F11') {
+            e.preventDefault();
+            toggleFullscreen();
+        }
+    });
+
     const contentData = {
         discover: {
             title: '1. Descoberta: Visibilidade Total',
