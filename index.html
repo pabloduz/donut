@@ -209,23 +209,23 @@
         
         /* Ajustes específicos para tela cheia */
         :fullscreen .donut-wrapper {
-            width: 350px !important;
-            height: 350px !important;
-            padding: 10px !important;
+            width: 550px !important;
+            height: 550px !important;
+            padding: 20px !important;
         }
         
         :fullscreen h1 {
-            font-size: 1.5rem !important;
-            margin-bottom: 0.25rem !important;
+            font-size: 2.5rem !important;  /* Mantém tamanho grande */
+            margin-bottom: 0.125rem !important;  /* Aproxima do donut */
         }
         
         :fullscreen header {
-            padding: 0.25rem 1rem !important;
+            padding: 0.25rem 1rem !important;  /* Compacta mais */
         }
         
         :fullscreen header p {
-            font-size: 0.875rem !important;
-            margin-bottom: 0.5rem !important;
+            font-size: 1.125rem !important;  /* Mantém legibilidade */
+            margin-bottom: 0.25rem !important;  /* Aproxima do donut */
         }
         
         /* Garantir que o layout caiba na altura da tela */
@@ -236,16 +236,41 @@
         }
         
         :fullscreen main {
-            padding: 0.25rem !important;
+            padding: 0.25rem !important;  /* Aproxima texto do donut */
         }
         
-        /* Ajustes adicionais para texto em fullscreen */
+        /* Manter tamanhos de fonte grandes em fullscreen */
         :fullscreen .text-2xl {
-            font-size: 1.25rem !important;
+            font-size: 2rem !important;  /* Mantém grande */
         }
         
         :fullscreen .md\\:text-4xl {
-            font-size: 1.5rem !important;
+            font-size: 2.5rem !important;  /* Mantém grande */
+        }
+        
+        /* Otimizar donut para diferentes resoluções em fullscreen */
+        @media (min-height: 900px) {
+            :fullscreen .donut-wrapper {
+                width: 650px !important;
+                height: 650px !important;
+                padding: 25px !important;
+            }
+            
+            :fullscreen h1 {
+                font-size: 2.75rem !important;  /* Ainda maior em telas altas */
+            }
+        }
+        
+        @media (min-height: 1200px) {
+            :fullscreen .donut-wrapper {
+                width: 750px !important;
+                height: 750px !important;
+                padding: 30px !important;
+            }
+            
+            :fullscreen h1 {
+                font-size: 3rem !important;  /* Máximo em telas muito altas */
+            }
         }
 
         @media (min-width: 1280px) {
