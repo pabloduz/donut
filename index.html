@@ -78,13 +78,6 @@
             color: #e2e8f0;
         }
 
-        body.dark .main-container::before {
-            background: 
-                radial-gradient(circle at 30% 70%, rgba(99, 102, 241, 0.08) 0%, transparent 40%),
-                radial-gradient(circle at 70% 30%, rgba(168, 85, 247, 0.08) 0%, transparent 40%),
-                linear-gradient(135deg, rgba(15, 23, 42, 0.6) 0%, rgba(30, 41, 59, 0.3) 50%, rgba(51, 65, 85, 0.4) 100%);
-        }
-
         /* Ocultar scrollbar para Webkit browsers (Chrome, Safari, etc.) */
         h1, h2, h3, h4, h5, h6 {
             font-weight: 600;
@@ -148,25 +141,9 @@
             position: relative;
         }
 
-        .main-container::before {
-            content: '';
-            position: absolute;
-            top: -50px;
-            left: -50px;
-            right: -50px;
-            bottom: -50px;
-            background: 
-                radial-gradient(circle at 30% 70%, rgba(59, 130, 246, 0.08) 0%, transparent 40%),
-                radial-gradient(circle at 70% 30%, rgba(20, 184, 166, 0.08) 0%, transparent 40%),
-                linear-gradient(135deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0.2) 100%);
-            border-radius: 30px;
-            z-index: -1;
-            backdrop-filter: blur(1px);
-        }
-
         .donut-wrapper {
-            width: 400px;
-            height: 400px;
+            width: 500px;
+            height: 500px;
             position: relative;
             margin: 0 auto;
             display: flex;
@@ -177,15 +154,27 @@
             padding: 15px;
         }
 
+        @media (min-width: 768px) {
+            .donut-wrapper {
+                width: 600px;
+                height: 600px;
+                padding: 20px;
+            }
+        }
+
         @media (min-width: 1024px) {
             .donut-wrapper {
-                width: 500px;
-                height: 500px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                padding: 20px;
-                overflow: visible;
+                width: 700px;
+                height: 700px;
+                padding: 25px;
+            }
+        }
+
+        @media (min-width: 1280px) {
+            .donut-wrapper {
+                width: 800px;
+                height: 800px;
+                padding: 30px;
             }
         }
         
@@ -287,10 +276,17 @@
             z-index: 10;
             transition: all 0.4s ease;
             margin: 0;
-            padding: 0;
+            padding: 20px;
             box-sizing: border-box;
-        }        .donut-center:hover {
+        }        
+
+        .donut-center:hover {
             transform: translate(-50%, -50%) scale(1.05);
+        }
+
+        .donut-center i {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
         }
 
         .donut-center h3 {
@@ -300,9 +296,27 @@
             text-align: center;
             margin: 0;
             line-height: 1.1;
-            font-size: 11px;
+            font-size: 14px;
             text-shadow: 0 1px 3px rgba(0,0,0,0.1);
             letter-spacing: 0.5px;
+        }
+
+        @media (min-width: 768px) {
+            .donut-center i {
+                font-size: 3rem;
+            }
+            .donut-center h3 {
+                font-size: 16px;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .donut-center i {
+                font-size: 3.5rem;
+            }
+            .donut-center h3 {
+                font-size: 18px;
+            }
         }
 
         /* Centro do donut no modo escuro */
@@ -316,10 +330,10 @@
             position: absolute;
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(20px);
-            padding: 12px 24px;
+            padding: 14px 28px;
             border-radius: 30px;
             font-weight: 700;
-            font-size: 14px;
+            font-size: 16px;
             box-shadow: 
                 0 15px 40px rgba(0,0,0,0.2),
                 0 5px 15px rgba(0,0,0,0.1);
@@ -328,7 +342,7 @@
             transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             cursor: pointer;
             white-space: nowrap;
-            min-width: 120px;
+            min-width: 140px;
             text-align: center;
             color: #1e293b;
         }
@@ -380,26 +394,26 @@
 
         /* Posicionamento alinhado com centro das imagens do donut */
         .label-discovery {
-            top: 5%;
-            left: 5%;
+            top: 8%;
+            left: 8%;
             transform: translate(-50%, -50%);
         }
 
         .label-assessment {
-            top: 5%;
-            right: 5%;
+            top: 8%;
+            right: 8%;
             transform: translate(50%, -50%);
         }
 
         .label-control {
-            bottom: 5%;
-            left: 5%;
+            bottom: 8%;
+            left: 8%;
             transform: translate(-50%, 50%);
         }
 
         .label-governance {
-            bottom: 5%;
-            right: 5%;
+            bottom: 8%;
+            right: 8%;
             transform: translate(50%, 50%);
         }
 
@@ -735,6 +749,44 @@
         body.dark .fullscreen-btn:hover i {
             color: #a5b4fc;
         }
+
+        /* Estilos específicos para tela cheia */
+        :fullscreen .modal-content {
+            max-width: 95vw;
+            max-height: 95vh;
+            padding: 2rem;
+        }
+
+        :fullscreen #discover-grid,
+        :fullscreen #assess-grid,
+        :fullscreen #control-grid,
+        :fullscreen #report-grid {
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            max-width: none;
+        }
+
+        /* Para telas muito grandes em fullscreen, limitar a 4 colunas */
+        @media (min-width: 1400px) {
+            :fullscreen #discover-grid,
+            :fullscreen #assess-grid,
+            :fullscreen #control-grid,
+            :fullscreen #report-grid {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 2rem;
+            }
+        }
+
+        /* Melhor espaçamento dos cards em fullscreen */
+        :fullscreen .modal-content .border {
+            padding: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        :fullscreen .modal-content .border h3 {
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+        }
     </style>
 </head>
 <body class="dark">
@@ -745,9 +797,9 @@
     </button>
 
     <!-- Container principal com design limpo -->
-    <div class="main-container relative z-10 h-screen p-4">
+    <div class="main-container relative z-10 h-screen p-2 flex flex-col">
         <!-- Header elegante -->
-        <header class="text-center py-3 px-4 relative">
+        <header class="text-center py-2 px-2 relative flex-shrink-0">
             <div class="animate-fade-in">
                 <h1 class="text-3xl md:text-5xl font-bold mb-2">
                     <i class="fas fa-shield-alt mr-3 gradient-shield-icon"></i>
@@ -763,8 +815,8 @@
         </header>
 
         <!-- Seção principal com donut interativo -->
-        <main class="relative px-4 pb-4 pt-2">
-            <section id="donut-navigation" class="flex flex-col items-center animate-fade-in" style="animation-delay: 300ms;">
+        <main class="relative px-2 pb-2 pt-1 flex-1 flex items-center justify-center">
+            <section id="donut-navigation" class="flex flex-col items-center animate-fade-in w-full" style="animation-delay: 300ms;">
                 <!-- Roda do Donut modernizada -->
                 <div class="donut-wrapper relative">
                     <!-- Peça 1: Descoberta (Superior Esquerda) -->
@@ -977,6 +1029,8 @@
                 { title: 'Coralogix', points: ['Análise de dados de observabilidade (logs, traces) e varredura de repositórios de código.', 'Identifica "Shadow AI" impulsionada pela atividade de desenvolvedores.'] },
                 { title: 'Crowdstrike', points: ['Visibilidade da plataforma unificada (agente de endpoint, conectores SaaS, sensores de nuvem).', 'Detecta o uso de ferramentas públicas de GenAI por funcionários e pacotes de IA em builds.'] },
                 { title: 'Securiti', points: ['Varredura automatizada de nuvens (IaaS/PaaS) e SaaS para catalogar modelos de IA.', 'Cria inventário de "shadow AI" e mapeia os dados que esses modelos acessam.'] },
+                { title: 'TrojAI', points: ['Descoberta especializada de trojans e backdoors em modelos de IA através de análise estática.', 'Varredura de repositórios de modelos para identificar alterações maliciosas ou não autorizadas.'] },
+                { title: 'CrewAI', points: ['Framework colaborativo de multi-agentes para descoberta distribuída de ameaças em IA.', 'Descoberta de sistemas de IA complexos através de orquestração de agentes especializados.'] },
             ],
             verdict: {
                 winner: 'Crowdstrike',
@@ -994,6 +1048,8 @@
                 { title: 'Coralogix', points: ['AI-SPM em tempo real com pontuação de postura dinâmica baseada em telemetria em tempo real.', 'Detecção de ameaças via "Avaliadores de Segurança" personalizáveis em dados em tempo real.'] },
                 { title: 'Crowdstrike', points: ['AI-SPM para ativos na nuvem com priorização de vulnerabilidades via EXPRT.AI.', 'Oferece serviços de AI Red Team liderados por especialistas para simulações de ataque aprofundadas.'] },
                 { title: 'Securiti', points: ['Avaliação de risco de modelo para viés, toxicidade e violação de direitos autorais.', 'Mapeamento do fluxo de dados (Data+AI Mapping) para identificar riscos na linhagem dos dados.'] },
+                { title: 'TrojAI', points: ['Testes especializados para detecção de trojans e backdoors em modelos de IA treinados.', 'Avaliação adversária específica para identificar vulnerabilidades de segurança em arquiteturas de ML.'] },
+                { title: 'CrewAI', points: ['Avaliação colaborativa através de múltiplos agentes especializados em diferentes aspectos de segurança.', 'Testes distribuídos de robustez e resiliência em sistemas multi-agentes de IA.'] },
             ],
             verdict: {
                 winner: 'Lakera',
@@ -1011,6 +1067,8 @@
                 { title: 'Coralogix', points: ['Detecção em tempo real de injeção de prompt e exposição de dados via análise em fluxo.', 'O foco principal é na detecção e alerta, com capacidades de bloqueio menos centrais.'] },
                 { title: 'Crowdstrike', points: ['Foco principal na prevenção de perda de dados (DLP) no endpoint.', 'Bloqueia uploads de dados sensíveis para ferramentas de GenAI, mas não analisa os prompts de entrada.'] },
                 { title: 'Securiti', points: ['Firewall de LLM de 3 estágios (Prompt, Retrieval, Response) para proteção completa.', 'O "Retrieval Firewall" aplica controles de acesso aos dados que alimentam sistemas RAG.'] },
+                { title: 'TrojAI', points: ['[NEG] Focado em detecção de trojans, mas não oferece controles proativos ou bloqueio em tempo real.', '[NEG] Não possui funcionalidades de gateway ou firewall para proteção de aplicações em produção.'] },
+                { title: 'CrewAI', points: ['Orquestração e controle de agentes autônomos com políticas de segurança distribuídas.', 'Gerenciamento de workflows de IA com controles de permissão granulares entre agentes.'] },
             ],
             verdict: {
                 winner: 'Securiti',
@@ -1024,10 +1082,12 @@
             intro: 'A camada final traduz dados técnicos em insights de negócio, garantindo a conformidade com regulamentações e políticas internas através de painéis e relatórios.',
             solutions: [
                 { title: 'IBM Guardium', points: ['Dashboards unificados que combinam métricas de segurança (Guardium) e governança (watsonx).', 'Mapeamento explícito para frameworks como EU AI Act, NIST e ISO 42001.'] },
-                { title: 'Lakera', points: ['Dashboards de gerenciamento de risco focados em ameaças a nível de aplicação.', 'Forte alinhamento com o framework OWASP Top 10 para LLMs.'] },
+                { title: 'Lakera', points: ['[NEUTRO] Dashboards de gerenciamento de risco focados em ameaças a nível de aplicação.', '[NEUTRO] Forte alinhamento com o framework OWASP Top 10 para LLMs.'] },
                 { title: 'Coralogix', points: ['Dashboard do AI-SPM com pontuações de postura, usuários de alto risco e tendências.', 'Mapeamento para padrões como ISO 42001, com forte capacidade de retenção de dados para auditoria.'] },
                 { title: 'Crowdstrike', points: ['Console unificado da Falcon com análise acelerada por IA (Charlotte AI).', 'Relatórios de avaliação mapeados para frameworks como o NIST.'] },
                 { title: 'Securiti', points: ['Dashboard de inteligência centralizado com alertas de segurança e violações de políticas.', 'Mapeamento para mais de 20 regulamentações globais, com automação de verificações de conformidade.'] },
+                { title: 'TrojAI', points: ['[NEG] Focado em detecção técnica de trojans, sem capacidades de dashboard ou relatórios de conformidade.', '[NEG] Não possui mapeamento para frameworks regulatórios ou governança empresarial.'] },
+                { title: 'CrewAI', points: ['Relatórios colaborativos gerados por múltiplos agentes especializados em conformidade.', 'Governança distribuída de sistemas multi-agentes com métricas de performance e segurança.'] },
             ],
             verdict: {
                 winner: 'Securiti',
@@ -1069,10 +1129,62 @@
         `;
 
         const solutionsHTML = [...data.solutions].sort((a, b) => {
+            // Função para calcular score de qualidade da ferramenta
+            const getQualityScore = (solution) => {
+                let positiveCount = 0;
+                let neutralCount = 0;
+                let negativeCount = 0;
+                
+                solution.points.forEach(p => {
+                    const hasNegTag = /\[(NEG|NA)\]/i.test(p);
+                    const hasPartTag = /\[(PART|NEUTRO)\]/i.test(p);
+                    const cleanText = p.replace(/\s*\[(NEG|NA|PART|NEUTRO)\]\s*/ig, '').trim();
+                    
+                    // Padrões mais específicos para negativos
+                    const negativePatterns = /(não aplicável|não possui|não oferece|focado em.*mas não|sem capacidades|focado em.*sem)/i;
+                    const isNeg = hasNegTag || negativePatterns.test(cleanText);
+                    
+                    // Padrões para parciais/neutros (incluindo frases específicas do Lakera)
+                    const partialPatterns = /(parcial(?:mente)?|limitad[oa]s?|foco principal|apenas|somente|menos centrais?|focados em ameaças a nível de aplicação|alinhamento com.*framework)/i;
+                    const isPart = !isNeg && (hasPartTag || partialPatterns.test(cleanText));
+                    
+                    if (isNeg) negativeCount++;
+                    else if (isPart) neutralCount++;
+                    else positiveCount++;
+                });
+                
+                // Score: positivos valem mais, negativos penalizam mais
+                return (positiveCount * 4) + (neutralCount * 1) - (negativeCount * 3);
+            };
+            
+            // Ordenação: vencedor primeiro, depois por score, runner-up pode ser reposicionado
             const w = data.verdict.winner;
             const r = data.verdict.runner_up;
-            const rank = (s) => (s.title === w ? 0 : s.title === r ? 1 : 2);
-            return rank(a) - rank(b);
+            
+            const aIsWinner = a.title === w;
+            const bIsWinner = b.title === w;
+            
+            // Vencedor sempre primeiro
+            if (aIsWinner && !bIsWinner) return -1;
+            if (bIsWinner && !aIsWinner) return 1;
+            
+            // Para todos os outros (incluindo runner-up), ordenar por score de qualidade
+            const aScore = getQualityScore(a);
+            const bScore = getQualityScore(b);
+            
+            // Se têm scores diferentes, ordenar pelo score
+            if (aScore !== bScore) {
+                return bScore - aScore; // Score maior primeiro (esquerda)
+            }
+            
+            // Se scores iguais, runner-up tem prioridade
+            const aIsRunnerUp = a.title === r;
+            const bIsRunnerUp = b.title === r;
+            if (aIsRunnerUp && !bIsRunnerUp) return -1;
+            if (bIsRunnerUp && !aIsRunnerUp) return 1;
+            
+            // Caso contrário, manter ordem alfabética
+            return a.title.localeCompare(b.title);
         }).map(solution => {
             const isWinner = solution.title === data.verdict.winner;
             const isRunnerUp = solution.title === data.verdict.runner_up;
@@ -1155,7 +1267,7 @@
                             </select>
                         </div>
                     </div>
-                    <div id="${sectionKey}-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 md:gap-6 xl:gap-5">
+                    <div id="${sectionKey}-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 xl:gap-5">
                         ${solutionsHTML}
                     </div>
                     ${legendHTML}
