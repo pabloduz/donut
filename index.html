@@ -23,7 +23,7 @@
                 radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
                 radial-gradient(circle at 40% 40%, rgba(120, 219, 226, 0.3) 0%, transparent 50%),
                 linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #cbd5e1 100%);
-            height: 100vh;
+            min-height: 100vh;
             color: #1e293b;
             position: relative;
             scrollbar-width: none; /* Firefox */
@@ -31,7 +31,8 @@
             font-weight: 400;
             letter-spacing: -0.01em;
             line-height: 1.6;
-            overflow: hidden;
+            overflow-x: hidden;
+            overflow-y: auto;
             transition: background 0.3s ease, color 0.3s ease;
         }
 
@@ -488,6 +489,115 @@
                 border-width: 1px;
             }
         }
+        
+        /* Media queries para altura pequena */
+        @media (max-height: 700px) {
+            h1 {
+                font-size: 1.8rem !important;
+                margin-bottom: 0.5rem;
+            }
+            
+            header {
+                padding: 0.5rem 0.5rem !important;
+            }
+            
+            .donut-wrapper {
+                width: 300px !important;
+                height: 300px !important;
+                padding: 8px !important;
+            }
+            
+            .external-label {
+                padding: 6px 10px !important;
+                font-size: 10px !important;
+                min-width: 80px !important;
+            }
+        }
+        
+        @media (max-height: 600px) {
+            h1 {
+                font-size: 1.5rem !important;
+                margin-bottom: 0.25rem;
+            }
+            
+            header p {
+                font-size: 0.875rem !important;
+                margin-bottom: 0.5rem !important;
+            }
+            
+            .donut-wrapper {
+                width: 250px !important;
+                height: 250px !important;
+                padding: 6px !important;
+            }
+            
+            .external-label {
+                padding: 4px 8px !important;
+                font-size: 9px !important;
+                min-width: 70px !important;
+            }
+        }
+        
+        @media (max-height: 500px) {
+            h1 {
+                font-size: 1.25rem !important;
+                margin-bottom: 0.125rem;
+            }
+            
+            header {
+                padding: 0.25rem 0.5rem !important;
+            }
+            
+            header p {
+                font-size: 0.75rem !important;
+                margin-bottom: 0.25rem !important;
+            }
+            
+            .donut-wrapper {
+                width: 200px !important;
+                height: 200px !important;
+                padding: 4px !important;
+            }
+            
+            .external-label {
+                padding: 3px 6px !important;
+                font-size: 8px !important;
+                min-width: 60px !important;
+            }
+        }
+        
+        /* Combinação de tela pequena (largura e altura) */
+        @media (max-width: 480px) and (max-height: 700px) {
+            h1 {
+                font-size: 1.3rem !important;
+            }
+            
+            .donut-wrapper {
+                width: 220px !important;
+                height: 220px !important;
+            }
+        }
+        
+        @media (max-width: 390px) and (max-height: 600px) {
+            h1 {
+                font-size: 1.1rem !important;
+            }
+            
+            header {
+                padding: 0.25rem !important;
+            }
+            
+            .donut-wrapper {
+                width: 180px !important;
+                height: 180px !important;
+            }
+            
+            .external-label {
+                padding: 2px 4px !important;
+                font-size: 7px !important;
+                min-width: 50px !important;
+            }
+        }
 
         /* Estilos para o modal */
         .modal-overlay {
@@ -797,7 +907,7 @@
     </button>
 
     <!-- Container principal com design limpo -->
-    <div class="main-container relative z-10 h-screen p-2 flex flex-col">
+    <div class="main-container relative z-10 min-h-screen p-2 flex flex-col">
         <!-- Header elegante -->
         <header class="text-center py-2 px-2 relative flex-shrink-0">
             <div class="animate-fade-in">
@@ -815,7 +925,7 @@
         </header>
 
         <!-- Seção principal com donut interativo -->
-        <main class="relative px-2 pb-2 pt-1 flex-1 flex items-center justify-center">
+        <main class="relative px-2 pb-2 pt-1 flex-1 flex items-center justify-center min-h-0">
             <section id="donut-navigation" class="flex flex-col items-center animate-fade-in w-full" style="animation-delay: 300ms;">
                 <!-- Roda do Donut modernizada -->
                 <div class="donut-wrapper relative">
@@ -1538,6 +1648,59 @@
         };
         window.addEventListener('hashchange', openFromHash);
         openFromHash();
+        
+        // Ajuste dinâmico para telas muito pequenas
+        function adjustForSmallScreens() {
+            const vh = window.innerHeight;
+            const vw = window.innerWidth;
+            
+            // Se a tela for muito pequena, adicionar classe para ajustes extremos
+            if (vh < 500 || (vh < 600 && vw < 400)) {
+                document.body.classList.add('ultra-compact');
+            } else {
+                document.body.classList.remove('ultra-compact');
+            }
+        }
+        
+        // Adicionar CSS para modo ultra-compacto
+        const compactStyle = document.createElement('style');
+        compactStyle.textContent = `
+            .ultra-compact h1 {
+                font-size: 1rem !important;
+                margin-bottom: 0.25rem !important;
+            }
+            
+            .ultra-compact header {
+                padding: 0.25rem !important;
+            }
+            
+            .ultra-compact header p {
+                font-size: 0.7rem !important;
+                margin-bottom: 0.25rem !important;
+            }
+            
+            .ultra-compact .donut-wrapper {
+                width: 160px !important;
+                height: 160px !important;
+                padding: 2px !important;
+            }
+            
+            .ultra-compact .external-label {
+                padding: 1px 3px !important;
+                font-size: 6px !important;
+                min-width: 40px !important;
+                border-width: 1px !important;
+            }
+            
+            .ultra-compact main {
+                padding: 0.25rem !important;
+            }
+        `;
+        document.head.appendChild(compactStyle);
+        
+        // Executar na inicialização e redimensionamento
+        adjustForSmallScreens();
+        window.addEventListener('resize', adjustForSmallScreens);
 
         // Toggle: mostrar só vencedor e segundo
         document.querySelectorAll('.top2-toggle').forEach(chk => {
