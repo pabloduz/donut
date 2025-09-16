@@ -1029,8 +1029,8 @@
                 { title: 'Coralogix', points: ['Análise de dados de observabilidade (logs, traces) e varredura de repositórios de código.', 'Identifica "Shadow AI" impulsionada pela atividade de desenvolvedores.'] },
                 { title: 'Crowdstrike', points: ['Visibilidade da plataforma unificada (agente de endpoint, conectores SaaS, sensores de nuvem).', 'Detecta o uso de ferramentas públicas de GenAI por funcionários e pacotes de IA em builds.'] },
                 { title: 'Securiti', points: ['Varredura automatizada de nuvens (IaaS/PaaS) e SaaS para catalogar modelos de IA.', 'Cria inventário de "shadow AI" e mapeia os dados que esses modelos acessam.'] },
-                { title: 'TrojAI', points: ['Descoberta especializada de trojans e backdoors em modelos de IA através de análise estática.', 'Varredura de repositórios de modelos para identificar alterações maliciosas ou não autorizadas.'] },
-                { title: 'CrewAI', points: ['Framework colaborativo de multi-agentes para descoberta distribuída de ameaças em IA.', 'Descoberta de sistemas de IA complexos através de orquestração de agentes especializados.'] },
+                { title: 'TrojAI', points: ['[NEG] Focado em detecção de trojans em modelos, não descoberta de Shadow AI em organizações.', '[NEG] Não possui capacidades de varredura de nuvens ou SaaS para identificar uso não autorizado de IA.'] },
+                { title: 'CrewAI', points: ['[NEUTRO] Framework de orquestração de agentes, mas não focado especificamente em discovery de Shadow AI.', 'Pode ser usado para descoberta colaborativa, mas requer configuração específica para segurança.'] },
             ],
             verdict: {
                 winner: 'Crowdstrike',
@@ -1049,7 +1049,7 @@
                 { title: 'Crowdstrike', points: ['AI-SPM para ativos na nuvem com priorização de vulnerabilidades via EXPRT.AI.', 'Oferece serviços de AI Red Team liderados por especialistas para simulações de ataque aprofundadas.'] },
                 { title: 'Securiti', points: ['Avaliação de risco de modelo para viés, toxicidade e violação de direitos autorais.', 'Mapeamento do fluxo de dados (Data+AI Mapping) para identificar riscos na linhagem dos dados.'] },
                 { title: 'TrojAI', points: ['Testes especializados para detecção de trojans e backdoors em modelos de IA treinados.', 'Avaliação adversária específica para identificar vulnerabilidades de segurança em arquiteturas de ML.'] },
-                { title: 'CrewAI', points: ['Avaliação colaborativa através de múltiplos agentes especializados em diferentes aspectos de segurança.', 'Testes distribuídos de robustez e resiliência em sistemas multi-agentes de IA.'] },
+                { title: 'CrewAI', points: ['[NEUTRO] Pode ser configurado para testes colaborativos, mas não é uma ferramenta nativa de assessment de segurança.', '[NEUTRO] Framework genérico que requer expertise em segurança para implementar avaliações adequadas.'] },
             ],
             verdict: {
                 winner: 'Lakera',
@@ -1068,13 +1068,13 @@
                 { title: 'Crowdstrike', points: ['Foco principal na prevenção de perda de dados (DLP) no endpoint.', 'Bloqueia uploads de dados sensíveis para ferramentas de GenAI, mas não analisa os prompts de entrada.'] },
                 { title: 'Securiti', points: ['Firewall de LLM de 3 estágios (Prompt, Retrieval, Response) para proteção completa.', 'O "Retrieval Firewall" aplica controles de acesso aos dados que alimentam sistemas RAG.'] },
                 { title: 'TrojAI', points: ['[NEG] Focado em detecção de trojans, mas não oferece controles proativos ou bloqueio em tempo real.', '[NEG] Não possui funcionalidades de gateway ou firewall para proteção de aplicações em produção.'] },
-                { title: 'CrewAI', points: ['Orquestração e controle de agentes autônomos com políticas de segurança distribuídas.', 'Gerenciamento de workflows de IA com controles de permissão granulares entre agentes.'] },
+                { title: 'CrewAI', points: ['Controle nativo de orquestração para sistemas multi-agentes autônomos com políticas de segurança distribuídas.', 'Única solução que oferece gerenciamento granular de permissões e workflows entre agentes de IA colaborativos.'] },
             ],
             verdict: {
-                winner: 'Securiti',
-                reason: 'A arquitetura de firewall de 3 estágios, especialmente o "Retrieval Firewall", aborda o principal vetor de risco em arquiteturas RAG empresariais (os próprios dados), tornando-a a solução de controle mais robusta e moderna.',
-                runner_up: 'IBM Guardium',
-                runner_up_reason: 'O Gateway de IA nativo oferece proteção robusta e em tempo real contra injeções de prompt e jailbreaks, um controle essencial para aplicações baseadas em LLM.'
+                winner: 'CrewAI',
+                reason: 'Oferece controle nativo de orquestração de agentes autônomos com políticas de segurança distribuídas, representando a próxima geração de controle em sistemas de IA multi-agentes complexos.',
+                runner_up: 'Securiti',
+                runner_up_reason: 'A arquitetura de firewall de 3 estágios, especialmente o "Retrieval Firewall", aborda o principal vetor de risco em arquiteturas RAG empresariais tradicionais.'
             }
         },
         report: {
@@ -1087,7 +1087,7 @@
                 { title: 'Crowdstrike', points: ['Console unificado da Falcon com análise acelerada por IA (Charlotte AI).', 'Relatórios de avaliação mapeados para frameworks como o NIST.'] },
                 { title: 'Securiti', points: ['Dashboard de inteligência centralizado com alertas de segurança e violações de políticas.', 'Mapeamento para mais de 20 regulamentações globais, com automação de verificações de conformidade.'] },
                 { title: 'TrojAI', points: ['[NEG] Focado em detecção técnica de trojans, sem capacidades de dashboard ou relatórios de conformidade.', '[NEG] Não possui mapeamento para frameworks regulatórios ou governança empresarial.'] },
-                { title: 'CrewAI', points: ['Relatórios colaborativos gerados por múltiplos agentes especializados em conformidade.', 'Governança distribuída de sistemas multi-agentes com métricas de performance e segurança.'] },
+                { title: 'CrewAI', points: ['[NEUTRO] Framework de orquestração de agentes, mas não específico para governança de segurança empresarial.', '[NEUTRO] Pode gerar relatórios colaborativos, mas não possui mapeamento nativo para frameworks regulatórios.'] },
             ],
             verdict: {
                 winner: 'Securiti',
