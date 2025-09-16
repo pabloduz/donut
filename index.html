@@ -206,6 +206,47 @@
                 padding: 26px;
             }
         }
+        
+        /* Ajustes específicos para tela cheia */
+        :fullscreen .donut-wrapper {
+            width: 350px !important;
+            height: 350px !important;
+            padding: 10px !important;
+        }
+        
+        :fullscreen h1 {
+            font-size: 1.5rem !important;
+            margin-bottom: 0.25rem !important;
+        }
+        
+        :fullscreen header {
+            padding: 0.25rem 1rem !important;
+        }
+        
+        :fullscreen header p {
+            font-size: 0.875rem !important;
+            margin-bottom: 0.5rem !important;
+        }
+        
+        /* Garantir que o layout caiba na altura da tela */
+        :fullscreen .main-container {
+            height: 100vh !important;
+            min-height: auto !important;
+            overflow: hidden !important;
+        }
+        
+        :fullscreen main {
+            padding: 0.25rem !important;
+        }
+        
+        /* Ajustes adicionais para texto em fullscreen */
+        :fullscreen .text-2xl {
+            font-size: 1.25rem !important;
+        }
+        
+        :fullscreen .md\\:text-4xl {
+            font-size: 1.5rem !important;
+        }
 
         @media (min-width: 1280px) {
             .donut-wrapper {
