@@ -26,13 +26,30 @@
             height: 100vh;
             color: #1e293b;
             position: relative;
-            scrollbar-width: none; /* Firefox */
-            -ms-overflow-style: none; /* IE and Edge */
             font-weight: 400;
             letter-spacing: -0.01em;
             line-height: 1.6;
             overflow: hidden;
             transition: background 0.3s ease, color 0.3s ease;
+            
+            /* Esconder scrollbar em todos os navegadores */
+            scrollbar-width: none; /* Firefox */
+            -ms-overflow-style: none; /* IE e Edge */
+        }
+        
+        /* Esconder scrollbar no WebKit (Chrome, Safari, Edge) */
+        body::-webkit-scrollbar {
+            display: none;
+        }
+        
+        /* Aplicar scrollbar escondida globalmente */
+        * {
+            scrollbar-width: none; /* Firefox */
+            -ms-overflow-style: none; /* IE e Edge */
+        }
+        
+        *::-webkit-scrollbar {
+            display: none; /* WebKit */
         }
         
         /* Permitir scroll apenas quando necessário */
@@ -42,6 +59,15 @@
                 height: auto;
                 overflow-y: auto;
                 overflow-x: hidden;
+                
+                /* Manter scrollbar escondida mesmo com scroll ativo */
+                scrollbar-width: none; /* Firefox */
+                -ms-overflow-style: none; /* IE e Edge */
+            }
+            
+            /* Esconder scrollbar no WebKit mesmo com scroll */
+            body::-webkit-scrollbar {
+                display: none;
             }
         }
 
