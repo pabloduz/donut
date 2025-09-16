@@ -34,6 +34,16 @@
             overflow: hidden;
             transition: background 0.3s ease, color 0.3s ease;
         }
+        
+        /* Permitir scroll apenas quando necessário */
+        @media (max-height: 700px), (max-width: 480px) {
+            body {
+                min-height: 100vh;
+                height: auto;
+                overflow-y: auto;
+                overflow-x: hidden;
+            }
+        }
 
         /* Melhorias tipográficas */
         h1, h2, h3, h4, h5, h6 {
@@ -44,7 +54,7 @@
         }
 
         h1 {
-            font-size: 2.5rem;
+            font-size: 1.875rem;  /* Voltando ao tamanho anterior */
             font-weight: 700;
         }
 
@@ -136,14 +146,24 @@
         }
         
         .main-container {
-            max-width: 1200px;
+            max-width: 100%;
+            width: 100%;
             margin: 0 auto;
             position: relative;
+            padding: 0 1rem;
+        }
+        
+        /* Limitar largura apenas em telas muito grandes para manter legibilidade */
+        @media (min-width: 1400px) {
+            .main-container {
+                max-width: 1200px;
+                padding: 0 2rem;
+            }
         }
 
         .donut-wrapper {
-            width: 500px;
-            height: 500px;
+            width: 320px;  /* 375 * 0.85 */
+            height: 320px;
             position: relative;
             margin: 0 auto;
             display: flex;
@@ -151,22 +171,39 @@
             justify-content: center;
             border-radius: 50%;
             overflow: visible;
-            padding: 15px;
+            padding: 10px;  /* 12 * 0.85 */
         }
 
         @media (min-width: 768px) {
             .donut-wrapper {
-                width: 600px;
-                height: 600px;
-                padding: 20px;
+                width: 380px;  /* 450 * 0.85 */
+                height: 380px;
+                padding: 13px;  /* 15 * 0.85 */
             }
         }
 
         @media (min-width: 1024px) {
             .donut-wrapper {
-                width: 700px;
-                height: 700px;
-                padding: 25px;
+                width: 445px;  /* 525 * 0.85 */
+                height: 445px;
+                padding: 15px;  /* 18 * 0.85 */
+            }
+        }
+        
+        /* Aproveitar telas ultrawide e muito grandes */
+        @media (min-width: 1400px) {
+            .donut-wrapper {
+                width: 510px;  /* 600 * 0.85 */
+                height: 510px;
+                padding: 19px;  /* 22 * 0.85 */
+            }
+        }
+        
+        @media (min-width: 1920px) {
+            .donut-wrapper {
+                width: 575px;  /* 675 * 0.85 */
+                height: 575px;
+                padding: 22px;  /* 26 * 0.85 */
             }
         }
 
@@ -488,6 +525,45 @@
                 border-width: 1px;
             }
         }
+        
+        /* Media queries para altura pequena - versão mais conservadora */
+        @media (max-height: 600px) {
+            h1 {
+                font-size: 1.5rem !important;
+                margin-bottom: 0.5rem;
+            }
+            
+            header {
+                padding: 0.5rem 0.5rem !important;
+            }
+        }
+        
+        @media (max-height: 500px) {
+            h1 {
+                font-size: 1.25rem !important;
+                margin-bottom: 0.25rem;
+            }
+            
+            header {
+                padding: 0.25rem 0.5rem !important;
+            }
+            
+            header p {
+                font-size: 0.75rem !important;
+                margin-bottom: 0.5rem !important;
+            }
+        }
+        
+        /* Otimizar para telas ultrawide - header mais compacto */
+        @media (min-width: 1400px) and (min-height: 800px) {
+            header {
+                padding: 1rem 2rem !important;
+            }
+            
+            h1 {
+                font-size: 2.25rem !important;  /* Maior em telas grandes */
+            }
+        }
 
         /* Estilos para o modal */
         .modal-overlay {
@@ -787,6 +863,21 @@
             font-size: 1.25rem;
             margin-bottom: 1rem;
         }
+        
+        /* Otimizar modais para telas grandes */
+        @media (min-width: 1400px) {
+            .modal-content {
+                max-width: 1200px !important;
+                width: 90vw !important;
+            }
+        }
+        
+        @media (min-width: 1920px) {
+            .modal-content {
+                max-width: 1400px !important;
+                width: 80vw !important;
+            }
+        }
     </style>
 </head>
 <body class="dark">
@@ -798,24 +889,33 @@
 
     <!-- Container principal com design limpo -->
     <div class="main-container relative z-10 h-screen p-2 flex flex-col">
+        <!-- Usar min-h-screen apenas em telas pequenas -->
+        <style>
+            @media (max-height: 700px), (max-width: 480px) {
+                .main-container {
+                    min-height: 100vh !important;
+                    height: auto !important;
+                }
+            }
+        </style>
         <!-- Header elegante -->
-        <header class="text-center py-2 px-2 relative flex-shrink-0">
+        <header class="text-center py-1 px-2 relative flex-shrink-0">
             <div class="animate-fade-in">
-                <h1 class="text-3xl md:text-5xl font-bold mb-2">
+                <h1 class="text-2xl md:text-4xl font-bold mb-2">
                     <i class="fas fa-shield-alt mr-3 gradient-shield-icon"></i>
                     <span class="gradient-title-text">Framework de Segurança IA</span>
                 </h1>
-                <p class="text-lg md:text-xl text-gray-700 dark:text-gray-300 mb-1 font-light">
+                <p class="text-base md:text-lg text-gray-700 dark:text-gray-300 mb-1 font-light">
                     Painel de Análise Comparativa
                 </p>
-                <p class="text-base text-gray-600 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed mb-4">
+                <p class="text-sm text-gray-600 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed mb-4">
                     Visualização interativa de soluções de segurança.
                 </p>
             </div>
         </header>
 
         <!-- Seção principal com donut interativo -->
-        <main class="relative px-2 pb-2 pt-1 flex-1 flex items-center justify-center">
+        <main class="relative px-1 pb-1 pt-0.5 flex-1 flex items-center justify-center min-h-0">
             <section id="donut-navigation" class="flex flex-col items-center animate-fade-in w-full" style="animation-delay: 300ms;">
                 <!-- Roda do Donut modernizada -->
                 <div class="donut-wrapper relative">
@@ -1538,6 +1638,42 @@
         };
         window.addEventListener('hashchange', openFromHash);
         openFromHash();
+        
+        // Ajuste apenas para telas extremamente pequenas
+        function adjustForVerySmallScreens() {
+            const vh = window.innerHeight;
+            const vw = window.innerWidth;
+            
+            // Apenas para casos extremos (celulares antigos ou janelas muito pequenas)
+            if (vh < 350 && vw < 300) {
+                document.body.classList.add('ultra-compact');
+            } else {
+                document.body.classList.remove('ultra-compact');
+            }
+        }
+        
+        // CSS apenas para casos extremos
+        const compactStyle = document.createElement('style');
+        compactStyle.textContent = `
+            .ultra-compact h1 {
+                font-size: 1rem !important;
+            }
+            
+            .ultra-compact .donut-wrapper {
+                width: 150px !important;
+                height: 150px !important;
+            }
+            
+            .ultra-compact .external-label {
+                font-size: 7px !important;
+                padding: 2px 4px !important;
+            }
+        `;
+        document.head.appendChild(compactStyle);
+        
+        // Executar apenas na inicialização
+        adjustForVerySmallScreens();
+        window.addEventListener('resize', adjustForVerySmallScreens);
 
         // Toggle: mostrar só vencedor e segundo
         document.querySelectorAll('.top2-toggle').forEach(chk => {
