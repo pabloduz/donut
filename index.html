@@ -80,7 +80,7 @@
         }
 
         h1 {
-            font-size: 1.875rem;  /* Voltando ao tamanho anterior */
+            font-size: 2.25rem;  /* Aumentado de 1.875rem */
             font-weight: 700;
         }
 
@@ -272,6 +272,11 @@
         
         :fullscreen .md\\:text-4xl {
             font-size: 2.5rem !important;  /* Mantém grande */
+        }
+        
+        /* Escudo em fullscreen */
+        :fullscreen .gradient-shield-icon {
+            font-size: 4rem !important;  /* Escudo muito grande em fullscreen */
         }
         
         /* Otimizar donut para diferentes resoluções em fullscreen */
@@ -504,6 +509,20 @@
             background-clip: text;
             color: transparent;
             -webkit-text-fill-color: transparent;
+            font-size: 2.5rem; /* Tamanho específico para o escudo */
+        }
+        
+        /* Aumentar escudo em dispositivos maiores */
+        @media (min-width: 768px) {
+            .gradient-shield-icon {
+                font-size: 3rem; /* Ainda maior em tablets/desktop */
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            .gradient-shield-icon {
+                font-size: 3.5rem; /* Máximo em desktop */
+            }
         }
 
         .external-label:hover {
@@ -993,7 +1012,7 @@
         <!-- Header elegante -->
         <header class="text-center py-0.5 px-2 relative flex-shrink-0">
             <div class="animate-fade-in">
-                <h1 class="text-2xl md:text-4xl font-bold mb-1">
+                <h1 class="text-3xl md:text-5xl font-bold mb-1">
                     <i class="fas fa-shield-alt mr-3 gradient-shield-icon"></i>
                     <span class="gradient-title-text">Framework de Segurança IA</span>
                 </h1>
